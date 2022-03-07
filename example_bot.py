@@ -1,4 +1,5 @@
 import discord
+import os
 
 bot = discord.Bot()
 
@@ -14,7 +15,9 @@ async def hello(ctx, name: str = None):
     await ctx.respond(f"Hello {name}!")
     print(f"Received hello-req from {ctx.author.name}")
 
-bot.run("OTQ5MTk0NDEyOTM4ODg3MTg5.YiG0Lw.x6q-diEuCi_M1BDcmhN3gmYFxeQ")
+key = os.getenv("BOT_TOKEN")
+
+bot.run(key)
 
 # import requests
 
