@@ -36,7 +36,7 @@ async def contests(ctx):
             minutes = int(((i['relativeTimeSeconds']*-1) - (days*60*60*24))/60/60)
 
             contests_name.append(i['name'])
-            contests_info.append(datetime.utcfromtimestamp(ts).strftime('%d-%m-%Y %H:%M') + "\n" + "Starting in " + str(days) + " days " + str(minutes) + " hours" + "\n\n")
+            contests_info.append((datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y %H:%M') + "\n" + "Starting in " + str(days) + " days " + str(minutes) + " hours" + "\n\n")
         
         else:
             break
