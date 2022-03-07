@@ -5,5 +5,3 @@ Bot functions
 
 - Set up team contest and update ranking/solves 
 - Random challenges / contests
-
-bot token: OTQ5MTk0NDEyOTM4ODg3MTg5.YiG0Lw.VskZ6M3MqIUc2p7eWxa6SdMDqYc
