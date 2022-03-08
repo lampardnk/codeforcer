@@ -93,8 +93,6 @@ async def contests(ctx):
 
 async def check_contest(ctx):
     while True:
-
-        await ctx.send("Daily check")
         response = requests.get("https://codeforces.com/api/contest.list")
 
         c = response.content
@@ -115,7 +113,7 @@ async def check_contest(ctx):
             dura = (i['durationSeconds']/60/60)
 
             if(status == "BEFORE" and name not in archive):
-                await ctx.send("Adding " + name)
+                await ctx.send("Added " + name)
                 
                 ts = start
 
@@ -132,7 +130,7 @@ async def check_contest(ctx):
             else:
                 break
 
-        await asyncio.sleep(86400.0)
+        await asyncio.sleep(3600.0)
 
 @bot.slash_command(
     guild_ids = testingServer, 
