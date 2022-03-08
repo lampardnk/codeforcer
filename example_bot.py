@@ -131,7 +131,7 @@ async def check_contest(ctx):
                 else:
                     break
 
-            await asyncio.sleep(259200.0)
+            await asyncio.sleep(86400.0)
     else:
         await ctx.respond("Set up has been performed")
 
