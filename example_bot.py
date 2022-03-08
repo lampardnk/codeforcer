@@ -61,8 +61,8 @@ async def contests(ctx):
 
             contests_name.append(name)
             contests_info.append(
-                (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y %H:%M') + "\n" 
-                + str(dura) + " hour long " + des + " contest" + "\n"
+                (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y   %H:%M') + "\n" 
+                + str(dura) + " hour " + des + " contest" + "\n"
                 + "> Starting in " + str(str(days) + " days " + str(minutes) + " hours") + "\n\n"
             )
 
@@ -121,8 +121,8 @@ async def check_contest(ctx):
 
                 await ctx.guild.create_scheduled_event(
                     name = name, 
-                    description = str(dura) + " hour long " + des + " contest", 
-                    start_time = (datetime.utcfromtimestamp(ts)), 
+                    description = str(dura) + " hour " + des + " contest", 
+                    start_time = (datetime.utcfromtimestamp(ts - 1800)), 
                     end_time = (datetime.utcfromtimestamp(ts) + timedelta(hours = dura)),
                     location = f"https://codeforces.com/contests/{i['id']}"
                 )
