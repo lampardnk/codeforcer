@@ -28,7 +28,6 @@ logo = "https://bit.ly/cf-logo-dis"
     description="Return list of upcoming codeforces contests" 
 )
 async def contests(ctx):
-
     embed = discord.Embed(
         title = "CodeForces Contests", 
         url = "https://codeforces.com/contests", 
@@ -61,9 +60,9 @@ async def contests(ctx):
 
             contests_name.append(name)
             contests_info.append(
-                (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y   %H:%M') + "\n" 
-                + str(dura) + " hour " + des + " contest" + "\n"
-                + "> Starting in " + str(str(days) + " days " + str(minutes) + " hours") + "\n\n"
+                "`" + (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y   %H:%M') + " | " 
+                + str(dura) + " hour " + des + " contest`" + "\n" 
+                + "> Starting in __**" + str(str(days) + " days " + str(minutes) + " hours**__") + "\n\n"
             )
 
         else:
@@ -93,15 +92,22 @@ async def contests(ctx):
 
 async def check_contest(ctx):
     while True:
-        response = requests.get("https://codeforces.com/api/contest.list")
+        log_time = datetime.now()
 
-        c = response.content
-        c = json.loads(c)
+        try:
+            response = requests.get("https://codeforces.com/api/contest.list")
 
-        if response.status_code == 200:
-            print("Connected to CF API for daily update")
-        else:
-            print("Can't connect to CF API for daily update")
+            c = response.content
+            c = json.loads(c)
+
+            if response.status_code == 200:
+                print(f"{log_time} Connected to CF API for daily update")
+            else:
+                print(f"{log_time} Can't connect to CF API for daily update")
+
+        except JSONDecodeError:
+            print(f"{log_time} JSON errors encountered")
+            continue
 
         for i in c["result"]:
 
@@ -130,7 +136,7 @@ async def check_contest(ctx):
             else:
                 break
 
-        await asyncio.sleep(3600.0)
+        await asyncio.sleep(10.0)
 
 @bot.slash_command(
     guild_ids = testingServer, 
