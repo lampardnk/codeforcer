@@ -11,7 +11,7 @@ bot = discord.Bot()
 
 first_time = True
 
-testingServer = ['859772204812206080']
+testingServer = ['859772204812206080','951052594078433351']
 contests_name = []
 contests_info = []
 archive = []
