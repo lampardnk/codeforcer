@@ -1,7 +1,0 @@
-Bot functions
-
-- Link handle with discord tag 
-- Notify contests 
-
-- Set up team contest and update ranking/solves 
-- Random challenges / contests
