@@ -3,9 +3,10 @@ import requests
 import json
 from discord.ext import commands
 import datetime
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import sys
 from discord.commands import SlashCommandGroup
+import pytz
 
 from main import testingServer, logo
 
@@ -29,8 +30,7 @@ class Contests(commands.Cog):
             color = discord.Color.red()
         )
 
-        log_time = datetime.now()
-        log_time.replace(tzinfo=timezone.utc)
+        log_time = datetime.now(pytz.timezone('Asia/Singapore'))
 
         try:
             response = requests.get("https://codeforces.com/api/contest.list")
@@ -38,62 +38,68 @@ class Contests(commands.Cog):
             if response.status_code == 200:
                 print("Connected to CF API")
             else:
-                print("Can't connect to CF API")
+                print(f"{log_time} CF API req returned {response.status_code}")
                 await ctx.respond("CF API down, please try again later")
                 raise Exception()
 
             c = response.content
             c = json.loads(c)
 
-            for i in c["result"]:
+            if c["status"] == "OK":
 
-                name = i['name']
-                status = i["phase"]
-                start = int(i['startTimeSeconds'])
-                before_start = i['relativeTimeSeconds']
-                des = i['type']
-                dura = (i['durationSeconds']/60/60)
-                
-                if(status == "BEFORE"):
-                    ts = start
-                    days = int(before_start/60/-60/24)
-                    minutes = int(((before_start*-1) - (days*60*60*24))/60/60)
+                for i in c["result"]:
 
-                    contests_name.append(name)
-                    contests_info.append(
-                        "`" + (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y   %H:%M') + " | " 
-                        + str(dura) + " hour " + des + " contest`" + "\n" 
-                        + "> Starting in __**" + str(str(days) + " days " + str(minutes) + " hours**__") + "\n\n"
+                    name = i['name']
+                    status = i["phase"]
+                    start = int(i['startTimeSeconds'])
+                    before_start = i['relativeTimeSeconds']
+                    des = i['type']
+                    dura = (i['durationSeconds']/60/60)
+                    
+                    if(status == "BEFORE"):
+                        ts = start
+                        days = int(before_start/60/-60/24)
+                        minutes = int(((before_start*-1) - (days*60*60*24))/60/60)
+
+                        contests_name.append(name)
+                        contests_info.append(
+                            "`" + (datetime.utcfromtimestamp(ts) + timedelta(hours=8)).strftime('%d-%m-%Y   %H:%M') + " | " 
+                            + str(dura) + " hour " + des + " contest`" + "\n" 
+                            + "> Starting in __**" + str(str(days) + " days " + str(minutes) + " hours**__") + "\n\n"
+                        )
+
+                    else:
+                        break
+
+                print(f"Received contest-req from {ctx.author.name}")
+
+                contests_info.reverse()
+                contests_name.reverse()
+
+                for i in range(0,len(contests_name)):
+                    embed.add_field(
+                        name = contests_name[i], 
+                        value = contests_info[i], 
+                        inline = False
                     )
 
-                else:
-                    break
+                embed.set_footer(text="Good luck have fun!")
 
-            print(f"Received contest-req from {ctx.author.name}")
-
-            contests_info.reverse()
-            contests_name.reverse()
-
-            for i in range(0,len(contests_name)):
-                embed.add_field(
-                    name = contests_name[i], 
-                    value = contests_info[i], 
-                    inline = False
+                embed.set_thumbnail(
+                    url = logo
                 )
 
-            embed.set_footer(text="Good luck have fun!")
-
-            embed.set_thumbnail(
-                url = logo
-            )
-
-            await ctx.respond(embed=embed)
+                await ctx.respond(embed=embed)
+                
+                contests_name.clear()
+                contests_info.clear()
             
-            contests_name.clear()
-            contests_info.clear()
+            else:
+                print(f"{log_time} JSON Error - Status code {response.status_code} but can't load JSON")
 
         except:
             print(f"{log_time} Errors encountered")
+            await ctx.respond(f"Errors encountered, please retry later")
             print(sys.exc_info()[0])
             pass
 
