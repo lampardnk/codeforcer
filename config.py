@@ -10,17 +10,10 @@ import mysql.connector
 mysql_user = os.getenv("MYSQL_USER")
 mysql_pwd = os.getenv("MYSQL_PWD")
 
-mydb = mysql.connector.connect(
-    host="localhost",
-    user=f"{mysql_user}",
-    password=f"{mysql_pwd}",
-    database="codeforcer"
-)
-
 class Connect():
     def __enter__(self):
         cnx = mysql.connector.connect(
-            host="localhost",
+            host="codeforcer.cxjbhuumzbdw.ap-southeast-1.rds.amazonaws.com",
             port=3306,
             user=f"{mysql_user}",
             password=f"{mysql_pwd}",
