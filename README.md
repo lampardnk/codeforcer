@@ -6,7 +6,7 @@
   <a href="https://discord.gg/AThCD7EV">
     <img src="https://img.shields.io/badge/Discord-blue?style=for-the-badge&logo=discord&logoColor=white" alt="LinkedIn Badge"/>
   </a>
-  <a href="nguyenkhackhanhlam@gmail.com">
+  <a href="mailto:nguyenkhackhanhlam@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Youtube Badge"/>
   </a>
 </div>
