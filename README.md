@@ -16,7 +16,7 @@
 </div>
 
 # codeforcer
-Discord bot for Codeforces contests
+Discord bot for reminding, managing and registering for Codeforces contests
 
 ---
 
