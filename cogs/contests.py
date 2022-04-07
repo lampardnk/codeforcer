@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.firefox.options import Options
 
 import config
 from config import testingServer, logo, emo, fetch
@@ -189,7 +190,10 @@ class Contests(commands.Cog):
                 if lines[1] == handle and lines[0] == ctx.author.name:
                     wait_time = 10
 
-                    driver = webdriver.Firefox()
+                    options = Options()
+                    options.headless = True
+                    driver = webdriver.Firefox(options=options)
+                    
                     driver.get("http://www.codeforces.com/contests")
                     assert "Codeforces" in driver.title
 
