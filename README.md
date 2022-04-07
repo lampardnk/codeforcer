@@ -21,9 +21,9 @@ Discord bot for Codeforces contests
 ---
 
 ### What is this?
-A simple Discord bot with 5 slash-commands:
+A simple Discord bot with 5 slash-commands (and 1 prefix, for reasons):
 
-- $login {handle} {password}: DM the bot with this command to login to codeforces. This command is needed for /background solves_updater and /contest signup to work properly
+- $login {handle} {password}: DM the bot with this command to login to codeforces. This command is needed for /background solves_updater and /contest signup to work properly. Can only link 1 Codeforces handle to 1 Discord username. I'm working on a change linked handle command but I will be keeping the 1:1.  
 
 ![image](https://user-images.githubusercontent.com/28803484/162221947-f5f55b32-42d0-421e-90b3-8436377b2c62.png)
 
@@ -41,7 +41,7 @@ A simple Discord bot with 5 slash-commands:
 
 ---
 
-- /contest signup {handle} : Sign up for ALL Registerable Codeforces contests on codeforces.com itself, using a handle that you logged in with
+- /contest signup {handle} : Sign up for ALL Codeforces contests (that are open for register) on codeforces.com itself, using the handle that you logged in with
 
 ![image](https://user-images.githubusercontent.com/28803484/162227382-ec11603a-c2dd-41ee-8ede-8f1eb5bf236f.png)
 
@@ -67,10 +67,10 @@ Unfortunately, slash commands is a new Discord feature so the bot won't work whe
 --- 
 
 ### Is my credentials safe?
-Big ol Nope :) It is definately NOT public, your codeforces handle and password will be stored in PLAINTEXT (yes, I am figuring out how to make them secure and accessible at the same time) in a PROTECTED MySQL server hosted on AWS RDS (at least it's not a .txt file :)).
+Big ol Nope :) It is definately NOT public, but your codeforces handle and password will be stored in PLAINTEXT (yes, I am figuring out how to make them secure and accessible at the same time) in a PROTECTED MySQL server hosted on AWS RDS (at least it's not a .txt file :)). This is also why the login function is a DM-only command, to help secure your creds.
 Anyway, please understand that to cut the need for you to enter your password whenever you use /background solves_updater or /contest signup, and also for ease of coding since codeforcer do a lot of API stuff, creds are stored in plain text, but the MySQL creds are environment variables, so don't worry, it is protected. 
 
-Pls note that this is a J4F project and has medium scalability only (the AWS instance the python script is running on is free tier and so is the MySQL DB), please don't spam too much I am too lazy to add timeouts to commands.
+Pls also note that this is a J4F project and has medium scalability only (the AWS instance the python script is running on is free tier and so is the MySQL DB), please don't spam too much I am too lazy to add timeouts to commands.
 
 ---
 
