@@ -228,6 +228,7 @@ class Contests(commands.Cog):
                             EC.presence_of_element_located((By.CSS_SELECTOR, "input.submit"))
                             )
                             elem.submit()
+                            sleep(5)
                             elem = WebDriverWait(driver, wait_time).until(
                             EC.presence_of_element_located((By.CSS_SELECTOR, "div.lang-chooser"))
                             )
