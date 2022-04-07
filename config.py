@@ -13,7 +13,7 @@ mysql_pwd = os.getenv("MYSQL_PWD")
 class Connect():
     def __enter__(self):
         cnx = mysql.connector.connect(
-            host="codeforcer.cxjbhuumzbdw.ap-southeast-1.rds.amazonaws.com",
+            host="codeforcer-db.cxjbhuumzbdw.ap-southeast-1.rds.amazonaws.com",
             port=3306,
             user=f"{mysql_user}",
             password=f"{mysql_pwd}",
