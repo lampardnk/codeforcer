@@ -78,7 +78,7 @@ async def help(ctx):
     embed.set_footer(text="Contact me through Discord if you need help: 0xlampardNK#2683")
 
     await ctx.reply(
-        embed=embed, ephemeral = True
+        embed=embed
     )
 
 if __name__ == "__main__":
