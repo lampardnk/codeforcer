@@ -77,8 +77,8 @@ async def link(ctx,username,password):
                         (
                             username,
                             password,
-                            '0xlampardNK'
-                        ),
+                            sender,
+                        )
                     )
 
                     cnx.commit()
