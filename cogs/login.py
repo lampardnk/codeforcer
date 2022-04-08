@@ -15,58 +15,83 @@ async def link(ctx,username,password):
         log_time.replace(tzinfo=timezone.utc)
         sender = ctx.author.name
         
-        if sender not in discord_id:
-            base = "https://codeforces.com"
-            service_url = "{base}/{login}".format(base=base, login="enter")
+        base = "https://codeforces.com"
+        service_url = "{base}/{login}".format(base=base, login="enter")
 
-            s = requests.session()
-            dt = s.get(service_url)
-            dt = dt.text
-            ss = BeautifulSoup(dt, 'html.parser')
-            csrf_token = ss.find_all("span", {"class": "csrf-token"})[0]["data-csrf"]
-            # print(csrf_token)
+        s = requests.session()
+        dt = s.get(service_url)
+        dt = dt.text
+        ss = BeautifulSoup(dt, 'html.parser')
+        csrf_token = ss.find_all("span", {"class": "csrf-token"})[0]["data-csrf"]
+        # print(csrf_token)
 
-            headers = {
-                'X-Csrf-Token': csrf_token
-            }
-            payload = {
-                'csrf_token': csrf_token,
-                'action': 'enter',
-                'handleOrEmail': username,
-                'password': password,
-            }
-            data = s.post(service_url, data=payload, headers=headers)
-            data = data.text
-            soup = BeautifulSoup(data, 'html.parser')
+        headers = {
+            'X-Csrf-Token': csrf_token
+        }
+        payload = {
+            'csrf_token': csrf_token,
+            'action': 'enter',
+            'handleOrEmail': username,
+            'password': password,
+        }
+        data = s.post(service_url, data=payload, headers=headers)
+        data = data.text
+        soup = BeautifulSoup(data, 'html.parser')
 
-            logout = soup.select_one("a[href*=logout]")["href"]
-            data = s.get(base + logout)
+        logout = soup.select_one("a[href*=logout]")["href"]
+        data = s.get(base + logout)
 
-            if(data.status_code == 200):
-                    handles.append(username)
-                    
-                    discord_id.append(sender)
+        if(data.status_code == 200):
 
-                    await ctx.reply(f"Logged in successfully, welcome {username} {emo['tick']}")
+            if sender not in discord_id:
+                handles.append(username)
+                discord_id.append(sender)
 
-                    with config.Connect() as cnx:
-                        cursor = cnx.cursor()
+                await ctx.reply(f"Logged in successfully, welcome {username} {emo['tick']}")
 
-                        cursor.execute(
-                            'INSERT INTO creds (discord_id, cf_handle, cf_password)'\
-                            'VALUES (%s, %s, %s)',
-                            (
-                                sender,
-                                username,
-                                password
-                            ),
-                        )
+                with config.Connect() as cnx:
+                    cursor = cnx.cursor()
 
-                        cnx.commit()
+                    cursor.execute(
+                        'INSERT INTO creds (discord_id, cf_handle, cf_password)'\
+                        'VALUES (%s, %s, %s)',
+                        (
+                            sender,
+                            username,
+                            password
+                        ),
+                    )
+
+                    cnx.commit()
             else:
-                raise Exception
+                handles.remove(discord_id.index(sender))
+                discord_id.remove(sender)
+
+                handles.append(username)
+                discord_id.append(sender)
+
+                await ctx.reply(f"Handle updated successfully to {username} {emo['tick']}")
+
+                with config.Connect() as cnx:
+                    cursor = cnx.cursor()
+
+                    cursor.execute(
+                        'UPDATE creds'\
+                        'SET cf_handle = %s, cf_password = %s'\
+                        'WHERE discord_id = %s',
+                        (
+                            username,
+                            password,
+                            sender
+                        ),
+                    )
+
+                    cnx.commit()
+                
+            print(f"Updated creds: \n{discord_id}\n{handles}")
+            
         else:
-            await ctx.reply(f"Can only link to one CF handle per discord user {emo['x']}")
+            raise Exception
 
     except:
         print(f"{log_time} Login error encountered")
