@@ -14,6 +14,8 @@ bot = commands.Bot(
     intents=intents
 )
 
+dir = "cogs."
+
 bot.remove_command('help')
 
 @bot.event
@@ -25,8 +27,8 @@ async def reload(ctx, module : str):
     if ctx.author.name == '0xlampardNK':
         print(f"reloading {module}")
         try:
-            bot.unload_extension(module)
-            bot.load_extension(module)
+            bot.unload_extension(f"{dir}{module}")
+            bot.load_extension(f"{dir}{module}")
         except Exception as e:
             await ctx.send(emo['pistol'])
             await ctx.send('{}: {}'.format(type(e).__name__, e))
@@ -36,7 +38,7 @@ async def reload(ctx, module : str):
         print("not onwer, cant use command")
 
 @bot.command(name='help')
-async def help(ctx, module : str):
+async def help(ctx):
     embed = discord.Embed(
         title = "codeforcer", 
         url = "https://github.com/lampardnk/codeforcer/blob/master/README.md", 
@@ -80,9 +82,9 @@ async def help(ctx, module : str):
     )
 
 if __name__ == "__main__":
-    bot.load_extension("cogs.login")
-    bot.load_extension("cogs.background")
-    bot.load_extension("cogs.contests")
+    bot.load_extension(f"{dir}login")
+    bot.load_extension(f"{dir}background")
+    bot.load_extension(f"{dir}contests")
 
     key = os.getenv("BOT_TOKEN")
     bot.run(key)
