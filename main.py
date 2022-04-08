@@ -14,6 +14,8 @@ bot = commands.Bot(
     intents=intents
 )
 
+bot.remove_command('help')
+
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
