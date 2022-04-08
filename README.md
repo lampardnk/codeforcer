@@ -17,6 +17,7 @@
 
 # codeforcer
 Discord bot for reminding, managing and registering for Codeforces contests
+Invite url: https://bit.ly/codeforcer
 
 ---
 
@@ -62,15 +63,16 @@ A simple Discord bot with 5 slash-commands (and 1 prefix, for reasons):
 ---
 
 ### How can I use this?
-Unfortunately, slash commands is a new Discord feature so the bot won't work immediately when it is added to your personal servers yet. This is because slash commands will take >1hr to register globally, this is a Discord thing so there's nothing I can do about it but wait for Discord to improve slash commands. For now I won't be switching to prefix commands because I much prefer slash commands features.
+Invite codeforcer to a server that you have admin rights using this url: https://bit.ly/codeforcer
 
 --- 
 
-### Is my credentials safe?
-Big ol Nope :) It is definately NOT public, but your codeforces handle and password will be stored in PLAINTEXT (yes, I am figuring out how to make them secure and accessible at the same time) in a PROTECTED MySQL server hosted on AWS RDS (at least it's not a .txt file :)). This is also why the login function is a DM-only command, to help secure your creds.
-Anyway, please understand that to cut the need for you to enter your password whenever you use /background solves_updater or /contest signup, and also for ease of coding since codeforcer do a lot of API stuff, creds are stored in plain text, but the MySQL creds are environment variables, so don't worry, it is protected. 
+### Are my credentials safe?
+TLDR: No, I can see them, but no one else can. 
 
-Pls also note that this is a J4F project and has medium scalability only (the AWS instance the python script is running on is free tier and so is the MySQL DB), please don't spam too much I am too lazy to add timeouts to commands.
+Codeforces credentials sent when you DM the bot with $login will be stored in plaintext in a password-protected MySQL server on AWS RDS. Since codeforcer cogs and other slash commands like /contests signup are used in channels so to cut the need to provide your Codeforces password, it will be stored in plaintext.
+
+I will do my best to ensure that the MySQL server is protected and will absolutely not mess with anyone's credentials in the database.  
 
 ---
 
