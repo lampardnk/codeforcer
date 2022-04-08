@@ -72,9 +72,11 @@ async def link(ctx,username,password):
                     cursor = cnx.cursor()
 
                     cursor.execute(
-                        'UPDATE creds'\
-                        'SET cf_handle = %s, cf_password = %s WHERE discord_id = %s;',
+                        'DELETE FROM creds WHERE discord_id=%s'\
+                        'INSERT INTO creds (discord_id, cf_handle, cf_password)'\
+                        'VALUES (%s, %s, %s)',
                         (
+                            sender,
                             username,
                             password,
                             sender,
