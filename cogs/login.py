@@ -118,7 +118,8 @@ class Login(commands.Cog):
         for rows in cursor:
             discord_id.append(str(rows[0]))
             handles.append(str(rows[1]))
-
+        
+        print(f"Fetched creds: \n{discord_id}\n{handles}")
 
     def __init__(self, bot):
         super().__init__()
