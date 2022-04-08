@@ -33,6 +33,50 @@ async def reload(ctx, module : str):
     else:
         print("not onwer, cant use command")
 
+@bot.command(name='help')
+async def help(ctx, module : str):
+    embed = discord.Embed(
+        title = "codeforcer", 
+        url = "https://github.com/lampardnk/codeforcer/blob/master/README.md", 
+        color = discord.Color.blue()
+    )
+
+    embed.add_field(
+        name = "/contest list", 
+        value = "Return an embed with a list of upcoming Codeforces contests", 
+        inline = False
+    )
+
+    embed.add_field(
+        name = "/contest summary {contest_id}", 
+        value = "Return a summary of the channel members results in a contest", 
+        inline = False
+    )
+
+    embed.add_field(
+        name = "/contest signup", 
+        value = "Sign up for ALL Codeforces contests (that are open for register) on codeforces.com itself, using the handle that you logged in with", 
+        inline = False
+    )
+
+    embed.add_field(
+        name = "/background check_contest", 
+        value = "Can be toggled. Check Codeforces API for all upcoming contests and create discord events for them", 
+        inline = False
+    )
+
+    embed.add_field(
+        name = "/background solves_updater {y/n}", 
+        value = "Can be toggled. Sends a message to the channel the command was used in whenever command user solved a problem", 
+        inline = False
+    )
+
+    embed.set_footer(text="Contact me through Discord if you need help: 0xlampardNK#2683")
+
+    await ctx.reply(
+        embed=embed, ephemeral = True
+    )
+
 if __name__ == "__main__":
     bot.load_extension("cogs.login")
     bot.load_extension("cogs.background")

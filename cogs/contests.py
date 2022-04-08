@@ -177,7 +177,7 @@ class Contests(commands.Cog):
     @contests.command(
         description="Register for ALL codeforces contests with handle"
     )
-    async def signup(self,ctx, handle : Option(str, "Enter handle to sign up with")):
+    async def signup(self,ctx):
         await ctx.respond("Registered, please check https://codeforces.com/contests to confirm", ephemeral = True)
 
         with config.Connect() as cnx:
@@ -187,7 +187,8 @@ class Contests(commands.Cog):
             )
             
             for lines in cursor:
-                if lines[1] == handle and lines[0] == ctx.author.name:
+                if lines[0] == ctx.author.name:
+                    handle = lines[1]
                     wait_time = 10
 
                     options = Options()
