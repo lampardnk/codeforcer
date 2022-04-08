@@ -73,8 +73,9 @@ async def link(ctx,username,password):
 
                     cursor.execute(
                         'UPDATE codeforcer.creds'\
-                        'SET cf_handle=%s, cf_password=%s'\
-                        'WHERE discord_id=%s;',
+                        'SET (cf_handle, cf_password)'\
+                        'VALUES (%s, %s)'
+                        'WHERE discord_id=%s',
                         (
                             username,
                             password,
