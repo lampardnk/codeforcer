@@ -8,7 +8,7 @@ import asyncio
 import time
 
 import config
-from config import testingServer,emo,fetch
+from config import emo,fetch
 
 global archive,solved,subscribers,guild_checks,added,guildObj,ids
 
@@ -38,6 +38,7 @@ with config.Connect() as cnx:
 async def contest_scheduler(contest):
         for guild in guildObj:
             check = True
+            
             with config.Connect() as cnx:
                 cursor = cnx.cursor(buffered=True)
                 cursor.execute(
@@ -83,13 +84,10 @@ class Background(commands.Cog):
         super().__init__()
         self.bot = bot
 
-    background = SlashCommandGroup('background', 'Group of commands for background tasks', guild_ids=testingServer)
+    background = SlashCommandGroup('background', 'Group of commands for background tasks')
 
     @commands.Cog.listener()
     async def on_ready(self):
-        for guild_id in testingServer:
-            guildObj.append(self.bot.get_guild(int(guild_id)))
-
         print("DLU READY")
         while True:
             url = "https://codeforces.com/api/contest.list"
@@ -143,6 +141,7 @@ class Background(commands.Cog):
                 
                 cnx.commit()
 
+                guildObj.append(self.bot.get_guild(int(ctx.guild.id)))
                 guild_checks.append(ctx.guild.id)
 
             else:
@@ -156,6 +155,8 @@ class Background(commands.Cog):
                 )
 
                 cnx.commit()
+
+                guildObj.remove(self.bot.get_guild(int(ctx.guild.id)))
                 guild_checks.remove(ctx.guild.id)
 
 #--------------------------------------------------------------------#

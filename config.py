@@ -25,7 +25,6 @@ class Connect():
     def __exit__(self, type, value, traceback):
         self.cnx.close()
 
-testingServer = ['859772204812206080','951052594078433351']
 logo = "https://bit.ly/cf-logo-dis"
 
 emo = {

@@ -15,14 +15,14 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.firefox.options import Options
 
 import config
-from config import testingServer, logo, emo, fetch
+from config import logo, emo, fetch
 
 class Contests(commands.Cog):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
 
-    contests = SlashCommandGroup('contests', 'Group of commands relating to contests', guild_ids=testingServer)
+    contests = SlashCommandGroup('contests', 'Group of commands relating to contests')
 
     @contests.command(
         description="Return codeforces contest list"
