@@ -25,16 +25,6 @@ global check_pause,live_pause
 check_pause = 30
 live_pause = 3
 
-with config.Connect() as cnx:
-    cursor = cnx.cursor(buffered=True)
-
-    cursor.execute(
-        'SELECT guild_id FROM guild_subscribers'
-    )
-
-    for rows in cursor:
-        guild_checks.append(int(rows[0]))
-    
 async def contest_scheduler(contest):
         for guild in guildObj:
             check = True
@@ -88,6 +78,18 @@ class Background(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
+
+        with config.Connect() as cnx:
+            cursor = cnx.cursor(buffered=True)
+
+            cursor.execute(
+                'SELECT guild_id FROM guild_subscribers'
+            )
+
+            for rows in cursor:
+                guild_checks.append(int(rows[0]))
+                guildObj.append(self.bot.get_guild(int(rows[0])))
+
         print("DLU READY")
         while True:
             url = "https://codeforces.com/api/contest.list"
