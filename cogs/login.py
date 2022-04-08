@@ -89,7 +89,7 @@ async def link(ctx,username,password):
                     cnx.commit()
                 
             print(f"Updated creds: \n{discord_id}\n{handles}")
-            
+
         else:
             raise Exception
 
@@ -116,8 +116,8 @@ class Login(commands.Cog):
         )
 
         for rows in cursor:
-            discord_id.append(rows[0])
-            handles.append(rows[1])
+            discord_id.append(str(rows[0]))
+            handles.append(str(rows[1]))
 
 
     def __init__(self, bot):
