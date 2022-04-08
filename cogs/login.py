@@ -64,11 +64,7 @@ async def link(ctx,username,password):
 
                     cnx.commit()
             else:
-                handles.remove(discord_id.index(sender))
-                discord_id.remove(sender)
-
-                handles.append(username)
-                discord_id.append(sender)
+                handles[discord_id.index(sender)] = username
 
                 await ctx.reply(f"Handle updated successfully to {username} {emo['tick']}")
 
