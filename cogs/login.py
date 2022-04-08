@@ -72,19 +72,25 @@ async def link(ctx,username,password):
                     cursor = cnx.cursor()
 
                     cursor.execute(
-                        'DELETE FROM creds WHERE discord_id=%s'\
+                        'DELETE FROM creds WHERE discord_id=%s',
+                        (
+                            sender,
+                        ),
+                    )
+
+                    cnx.commit()
+
+                    cursor.execute(
                         'INSERT INTO creds (discord_id, cf_handle, cf_password)'\
                         'VALUES (%s, %s, %s)',
                         (
                             sender,
-                            sender,
                             username,
                             password,
-                        )
+                        ),
                     )
-
+                    
                     cnx.commit()
-                
             print(f"Updated creds: \n{discord_id}\n{handles}")
 
         else:
