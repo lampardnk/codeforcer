@@ -77,9 +77,9 @@ async def link(ctx,username,password):
                         'VALUES (%s, %s, %s)',
                         (
                             sender,
+                            sender,
                             username,
                             password,
-                            sender,
                         )
                     )
 
