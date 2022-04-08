@@ -1,5 +1,5 @@
 <div id="header" align="center">
-  <img src="https://bit.ly/cf-logo-dis" width="100"/>
+  <img src="https://user-images.githubusercontent.com/28803484/162430376-34010c27-179c-4910-9967-0663a25334e4.png" width="100"/>
 </div>
 
 <div id="badges" align="center">
@@ -17,6 +17,7 @@
 
 # codeforcer
 Discord bot for reminding, managing and registering for Codeforces contests
+
 Invite url: https://bit.ly/codeforcer
 
 ---
