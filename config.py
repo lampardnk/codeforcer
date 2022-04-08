@@ -50,7 +50,7 @@ def fetch(url):
     except:
         e = True
         print(f"{log_time} Errors encountered")
-        print(sys.exc_info())
+        print(sys.exc_info()[0])
         pass
 
     return c,e
