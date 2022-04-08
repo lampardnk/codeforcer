@@ -62,7 +62,7 @@ A simple Discord bot with 5 slash-commands (and 1 prefix, for reasons):
 ---
 
 ### How can I use this?
-Unfortunately, slash commands is a new Discord feature so the bot won't work when it is added to your personal servers yet. This is because slash commands will take >1hr to register globally, this is a Discord thing so there's nothing I can do about it but wait for Discord to improve slash commands. For now I won't be switching to prefix commands because I much prefer slash commands features.
+Unfortunately, slash commands is a new Discord feature so the bot won't work immediately when it is added to your personal servers yet. This is because slash commands will take >1hr to register globally, this is a Discord thing so there's nothing I can do about it but wait for Discord to improve slash commands. For now I won't be switching to prefix commands because I much prefer slash commands features.
 
 --- 
 
