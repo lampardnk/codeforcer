@@ -23,7 +23,13 @@ Invite url: https://bit.ly/codeforcer
 ---
 
 ### What is this?
-A simple Discord bot with 5 slash-commands (and 1 prefix, for reasons):
+A simple Discord bot with 5 slash-commands and 2 prefix ones:
+
+- $help: Use this command to get a list of available slash commands
+
+![image](https://user-images.githubusercontent.com/28803484/162443898-a6358d24-42d2-4e41-8f59-347b5cb38b16.png)
+
+---
 
 - $login {handle} {password}: DM the bot with this command to login to codeforces. This command is needed for /background solves_updater and /contest signup to work properly. Can only link 1 Discord username to 1 Codeforces handle. You can link to a different handle by using $login again. 
 
