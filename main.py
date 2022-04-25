@@ -5,6 +5,8 @@ from discord.ext import commands
 
 from config import emo
 
+print("Bot is being deployed")
+
 intents = discord.Intents.default()
 intents.members = True 
 intents.message_content = True

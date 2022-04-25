@@ -289,14 +289,14 @@ class Background(commands.Cog):
 
     @check_contest.error
     async def command_name_error(self, ctx, error):
-        if isinstance(error, discord.commands.ApplicationCommandInvokeError):
-            await ctx.respond(f'This command is on cooldown, you can use it in {cd}s', ephemeral=True)
-    
-    @solves_updater.error
-    async def command_name_error(self, ctx, error):
-        if isinstance(error, discord.commands.errors.ApplicationCommandInvokeError):
+        if isinstance(error, discord.errors.ApplicationCommandInvokeError):
             await ctx.respond(f'This command is on cooldown, you can use it in {cd}s', ephemeral=True)
 
+    @solves_updater.error
+    async def command_name_error(self, ctx, error):
+        if isinstance(error, discord.errors.ApplicationCommandInvokeError):
+            await ctx.respond(f'This command is on cooldown, you can use it in {cd}s', ephemeral=True)
 
 def setup(bot):
     bot.add_cog(Background(bot))
+
