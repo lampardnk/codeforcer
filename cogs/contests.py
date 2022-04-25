@@ -1,4 +1,3 @@
-from email.policy import default
 from time import sleep
 from discord import Option
 import discord

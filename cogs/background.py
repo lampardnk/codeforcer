@@ -1,11 +1,9 @@
 import asyncio
-from email.policy import default
 from discord.ext import commands
 import datetime
 from datetime import datetime, timedelta
 import discord
 from discord.commands import SlashCommandGroup
-import asyncio
 import time
 
 import config
