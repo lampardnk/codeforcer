@@ -212,10 +212,10 @@ class Contests(commands.Cog):
                     reg = WebDriverWait(driver, wait_time).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "div.lang-chooser"))
                     )
-                    ctx.send(f"{emo['tick']} Registered {ctx.author.name} for contest {contest_id}")
+                    await ctx.send(f"{emo['tick']} Registered {ctx.author.name} for contest {contest_id}")
 
                 except NoSuchElementException:
-                    ctx.send(f"{emo['x']} Can not register {ctx.author.name} for contest {contest_id}")
+                    await ctx.send(f"{emo['x']} Can not register {ctx.author.name} for contest {contest_id}")
                     pass
                 
 
