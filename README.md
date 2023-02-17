@@ -82,31 +82,3 @@ A simple Discord bot that reminds you about upcoming contests
 
 ### How can I use this?
 Invite codeforcer to a server that you have admin rights using this url: https://bit.ly/codeforcer
-
---- 
-
-### Are my credentials safe?
-TLDR: No, I can see them, but no one else can. 
-
-Codeforces credentials sent when you DM the bot with $login will be stored in plaintext in a password-protected MySQL server on AWS RDS. Since codeforcer cogs and other slash commands like /contests signup are used in channels so to cut the need to provide your Codeforces password, it will be stored in plaintext.
-
-I will do my best to ensure that the MySQL server is protected and will absolutely not mess with anyone's credentials in the database.  
-
----
-
-### You cool how I talk? 
-Can contact me through Discord: 0xlampardNK#2683
-
----
-
-### Last but not least, credits
-
-To people whose code I shamefully copied (but of course, also studied):
-- deepak7514: Thank you Sir for your help with /contest signup, I referenced (95%) of your https://github.com/deepak7514/codeforces_automated_registration repository and it is amazing.
-- samuzora: Thank you for your sharing with me https://github.com/samuzora/CTF-cord, your bot was my inspiration and your repo structure helped me make mine. Pls check out his CTF Discord bot it is really cool.
-
-:sparkling_heart: Special thanks:
-
-To Lucas (aka samuzora): You are a really cool guy and so is your bot, please keep adding stuff (lol actually fix it first you might not want to add more stuff) to your CTF bot so I can be inspired to add more to mine. Thanks a lot for your help!
-
-And to nkt: Sir thank you for providing me with food and shelter and all kinds of support, both with CP and App Dev, for teaching me whatever I want and need. I would have never even been here without your help or existence. Thank you so much brother!  
